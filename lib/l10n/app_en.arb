@@ -1,0 +1,27 @@
+{
+  "@@locale": "en",
+  "themeSettings": "Theme Settings",
+  "appearance": "Appearance",
+  "lightTheme": "Light Theme",
+  "darkTheme": "Dark Theme",
+  "layout": "Layout",
+  "leftToRight": "Left to Right (ENG)",
+  "rightToLeft": "Right to Left (Arabic)",
+  "greeting": "Hi, {name}",
+  "@greeting": {
+    "placeholders": { "name": { "type": "String" } }
+  },
+  "onboarding1Title": "Where\nCommunities\nCome Alive",
+  "onboarding1Highlight": "Communities",
+  "onboarding1Subtitle": "Join communities that match your interests, profession, and goals. Discover content, people, and opportunities tailored just for you.",
+  "onboarding2Title": "Connect,\nShare & Grow\nTogether",
+  "onboarding2Highlight": "Share & Grow",
+  "onboarding2Subtitle": "Engage with posts, stories, discussions, and knowledge from people who share your passions and expertise.",
+  "onboarding3Title": "All\nOpportunities\nIn One Place",
+  "onboarding3Highlight": "Opportunities",
+  "onboarding3Subtitle": "Access expert consultations, community events, articles, and a trusted marketplace—all within your community.",
+  "skip": "Skip",
+  "continueLabel": "Continue",
+  "getStarted": "Get Started"
+  
+}

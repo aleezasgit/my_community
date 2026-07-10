@@ -1,0 +1,23 @@
+{
+  "@@locale": "ar",
+  "themeSettings": "إعدادات المظهر",
+  "appearance": "المظهر",
+  "lightTheme": "المظهر الفاتح",
+  "darkTheme": "المظهر الداكن",
+  "layout": "التخطيط",
+  "leftToRight": "من اليسار إلى اليمين (إنجليزي)",
+  "rightToLeft": "من اليمين إلى اليسار (عربي)",
+  "greeting": "مرحبًا، {name}",
+  "onboarding1Title": "حيث\nتنبض المجتمعات\nبالحياة",
+  "onboarding1Highlight": "المجتمعات",
+  "onboarding1Subtitle": "انضم إلى المجتمعات التي تناسب اهتماماتك ومهنتك وأهدافك. اكتشف المحتوى والأشخاص والفرص المصممة خصيصًا لك.",
+  "onboarding2Title": "تواصل،\nشارك وانمُ\nمعًا",
+  "onboarding2Highlight": "شارك وانمُ",
+  "onboarding2Subtitle": "تفاعل مع المنشورات والقصص والنقاشات والمعرفة من أشخاص يشاركونك شغفك وخبرتك.",
+  "onboarding3Title": "كل\nالفرص\nفي مكان واحد",
+  "onboarding3Highlight": "الفرص",
+  "onboarding3Subtitle": "احصل على استشارات الخبراء وفعاليات المجتمع والمقالات وسوق موثوق—كل ذلك داخل مجتمعك.",
+  "skip": "تخطي",
+  "continueLabel": "متابعة",
+  "getStarted": "ابدأ الآن"
+}
