@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:my_community_at_app/configs/configs.dart';
-import 'package:my_community_at_app/widgets/core/headers/bottomsheet_header.dart';
-import 'package:my_community_at_app/widgets/design/textfields/search_textfield/search_field.dart';
+import 'package:my_community/configs/configs.dart';
+import 'package:my_community/widgets/core/headers/bottomsheet_header.dart';
+import 'package:my_community/widgets/design/textfields/search_textfield/search_field.dart';
 // TODO: fix to your SearchField path
 
 import 'country_code.dart';
@@ -94,11 +94,10 @@ class _SelectPhoneCodeSheetState extends State<SelectPhoneCodeSheet> {
                     bottom: MediaQuery.of(context).padding.bottom + 16.h,
                   ),
                   itemCount: list.length,
-                  separatorBuilder: (_, __) => Space.yf(8),
+                  separatorBuilder: (_, _) => Space.yf(8),
                   itemBuilder: (_, index) {
                     final country = list[index];
-                    final isSelected =
-                        country.isoCode == widget.selected?.isoCode;
+                    final isSelected = country.isoCode == widget.selected?.isoCode;
                     return _CountryTile(
                       country: country,
                       selected: isSelected,

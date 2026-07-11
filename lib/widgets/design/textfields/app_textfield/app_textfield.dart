@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:my_community_at_app/configs/configs.dart';
+import 'package:my_community/configs/configs.dart';
 
 part 'enums.dart';
 

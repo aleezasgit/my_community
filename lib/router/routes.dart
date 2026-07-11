@@ -1,3 +1,6 @@
+import 'package:my_community/screens/aleeza_widgets/pick_interests.dart';
+import 'package:my_community/screens/aleeza_widgets/tell_us_about.dart';
+
 abstract class AppRoutes {
   static const splash = '/splash';
   static const onboarding = '/onboarding';
@@ -10,4 +13,7 @@ abstract class AppRoutes {
   static const forgotPassword = '/forgot-password';
   static const verifyIdentity = '/verify-identity';
   static const createNewPassword = '/create-new-password';
+   static const TestingScreen = '/testing-screen';
+   static const InterestScreen = '/interest-screen';
+   static const CommunityScreen = '/community-screen';
 }

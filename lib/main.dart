@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' as services;
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:my_community_at_app/l10n/app_localizations.dart';
-import 'package:my_community_at_app/router/router.dart';
-import 'package:my_community_at_app/router/routes.dart';
-import 'package:my_community_at_app/states/locale_controller.dart';
-import 'package:my_community_at_app/states/theme_controller.dart';
+import 'package:my_community/l10n/app_localizations.dart';
+import 'package:my_community/router/router.dart';
+import 'package:my_community/router/routes.dart';
+import 'package:my_community/states/locale_controller.dart';
+import 'package:my_community/states/theme_controller.dart';
 import 'package:navigation_history_observer/navigation_history_observer.dart';
 
 import 'configs/configs.dart' as theme;
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await ThemeController.instance.load();
   await LocaleController.instance.load();
@@ -57,7 +57,6 @@ class _MyAppState extends State<MyApp> {
     final localeController = LocaleScope.s(context);
 
     return AnimatedBuilder(
-      // Rebuild when either theme OR locale changes.
       animation: Listenable.merge([controller, localeController]),
       builder: (_, _) {
         return AnnotatedRegion<services.SystemUiOverlayStyle>(
@@ -78,11 +77,9 @@ class _MyAppState extends State<MyApp> {
                 navigatorKey: navigatorKey,
                 navigatorObservers: [...observers, NavigationHistoryObserver()],
                 debugShowCheckedModeBanner: false,
-
                 theme: theme.themeLight,
                 darkTheme: theme.themeDark,
                 themeMode: controller.mode,
-
                 locale: localeController.locale,
                 supportedLocales: LocaleController.supportedLocales,
                 localizationsDelegates: const [
@@ -91,13 +88,11 @@ class _MyAppState extends State<MyApp> {
                   GlobalWidgetsLocalizations.delegate,
                   GlobalCupertinoLocalizations.delegate,
                 ],
-
                 builder: (context, child) {
                   theme.App.init(context);
                   return child!;
                 },
-
-                initialRoute: AppRoutes.splash,
+                initialRoute: AppRoutes.CommunityScreen,
                 onGenerateRoute: onGenerateRoutes,
                 routes: appRoutes,
               );

@@ -2,7 +2,7 @@
 // import 'package:flutter_form_builder/flutter_form_builder.dart';
 // import 'package:flutter_screenutil/flutter_screenutil.dart';
 // import 'package:gradient_borders/box_borders/gradient_box_border.dart';
-// import 'package:my_community_at_app/configs/configs.dart';
+// import 'package:my_community/configs/configs.dart';
 
 // part 'enums.dart';
 
@@ -246,3 +246,4 @@
 //     );
 //   }
 // }
+

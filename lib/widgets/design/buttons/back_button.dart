@@ -1,8 +1,8 @@
 // import 'package:flutter/material.dart';
 // import 'package:flutter_screenutil/flutter_screenutil.dart';
 // import 'package:flutter_svg/svg.dart';
-// import 'package:my_community_at_app/configs/configs.dart';
-// import 'package:my_community_at_app/statics/app_statics.dart';
+// import 'package:my_community/configs/configs.dart';
+// import 'package:my_community/statics/app_statics.dart';
 
 // class AppBackButton extends StatelessWidget {
 //   const AppBackButton({super.key});
@@ -29,3 +29,4 @@
 //     );
 //   }
 // }
+

@@ -1,7 +1,7 @@
 // import 'package:flutter/material.dart';
 // import 'package:flutter_screenutil/flutter_screenutil.dart';
 // import 'package:flutter_svg/svg.dart';
-// import 'package:my_community_at_app/configs/configs.dart';
+// import 'package:my_community/configs/configs.dart';
 
 // class AuthButton extends StatelessWidget {
 //   final String label;
@@ -44,3 +44,4 @@
 //     );
 //   }
 // }
+
