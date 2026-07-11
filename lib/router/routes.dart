@@ -18,4 +18,7 @@ abstract class AppRoutes {
    static const CommunityScreen = '/community-screen';
   static const FriendsScreen = '/friends-screen';
   static const ShareMomentScreen = '/share-moment-screen';
+  static const SingleVideoScreen = '/single-video-screen';
+  static const yourOwnPostSinglePhotoScreen = '/your-own-post-single-photo-screen';
+  static const documentPostScreen = '/document-post-screen';
 }

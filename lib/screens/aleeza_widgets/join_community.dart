@@ -51,6 +51,7 @@ class _CommunityRowCard extends StatelessWidget {
              // height: 70.h,
               color: AppTheme.of(context).background.shade200,
               child: Image.asset(
+                height: 70.h,
                 imagePath,
                 fit: BoxFit.cover,
                 // errorBuilder: (_, __, ___) => Icon(
