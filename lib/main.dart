@@ -92,7 +92,7 @@ class _MyAppState extends State<MyApp> {
                   theme.App.init(context);
                   return child!;
                 },
-                initialRoute: AppRoutes.CommunityScreen,
+                initialRoute: AppRoutes.ShareMomentScreen,
                 onGenerateRoute: onGenerateRoutes,
                 routes: appRoutes,
               );

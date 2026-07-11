@@ -9,14 +9,14 @@ import 'package:my_community/configs/configs.dart';
 // 1. SUB-COMPONENT WIDGETS (Placed first)
 // =============================================================================
 
-class _CommunityRowCard extends StatelessWidget {
+class _FriendCard extends StatelessWidget {
   final String title;
   final String members;
   final String imagePath;
   final bool isJoined;
   final VoidCallback onJoinToggle;
 
-  const _CommunityRowCard({
+  const _FriendCard({
     required this.title,
     required this.members,
     required this.imagePath,
@@ -120,7 +120,7 @@ class _CommunityRowCard extends StatelessWidget {
                           ),
                           Space.xf(4),
                           Text(
-                            'Joined',
+                            'Invited',
                             style: AppText.l1b!.cl(AppTheme.of(context).text.shade800!),
                           ),
                         ],
@@ -138,7 +138,7 @@ class _CommunityRowCard extends StatelessWidget {
                           ),
                           Space.xf(4),
                           Text(
-                            'Join',
+                            'Invite',
                             style: AppText.b2b!.cl(AppTheme.of(context).white!),
                           ),
                         ],
@@ -189,7 +189,7 @@ class CommunitiesFormBuilderField extends StatelessWidget {
             final String imagePath = item['image']!;
             final bool isJoined = joinedList.contains(title);
 
-            return _CommunityRowCard(
+            return _FriendCard(
               title: title,
               members: members,
               imagePath: imagePath,
@@ -215,8 +215,8 @@ class CommunitiesFormBuilderField extends StatelessWidget {
 // 2. MAIN SCREEN ENTRY (Placed last)
 // =============================================================================
 
-class CommunitiesScreen extends StatelessWidget {
-  const CommunitiesScreen({super.key});
+class FriendsScreen extends StatelessWidget {
+  const FriendsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

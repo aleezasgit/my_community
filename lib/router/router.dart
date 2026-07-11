@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:my_community/router/routes.dart';
+import 'package:my_community/screens/aleeza_widgets/friends.dart';
 import 'package:my_community/screens/aleeza_widgets/join_community.dart';
 import 'package:my_community/screens/aleeza_widgets/pick_interests.dart';
+import 'package:my_community/screens/aleeza_widgets/share_your_first_moment.dart';
 import 'package:my_community/screens/aleeza_widgets/tell_us_about.dart';
 import 'package:my_community/screens/create_account/create_account.dart';
 import 'package:my_community/screens/create_new_password/create_new_password.dart';
@@ -28,7 +30,9 @@ final Map<String, Widget Function(dynamic)> appRoutes = {
   AppRoutes.createNewPassword: (_) => const CreateNewPasswordScreen(),
     AppRoutes.TestingScreen: (_) => const GenderScreen(),
     AppRoutes.InterestScreen: (_) => const InterestsScreen(),
+    AppRoutes.FriendsScreen: (_) => const FriendsScreen(),
     AppRoutes.CommunityScreen: (_) => const CommunitiesScreen(),
+    AppRoutes.ShareMomentScreen: (_) => const ShareMomentScreen(),
 
 };
 
