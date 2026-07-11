@@ -246,8 +246,8 @@ class OwnPostSinglePhotoScreen extends StatelessWidget {
 
             // Displaying the static Video Post Component with Mockup Values
             OwnPostSinglePhoto(
-              username: 'Borealis',
-              timeAgo: '30 Minutes ago',
+              username: 'Kairo (You)',
+              timeAgo: '53 Minutes ago',
               avatarPath: 'assets/pngs/Frame 2147229685.png',
               photoPath: 'assets/pngs/Rectangle 88.png',
               captionUser: 'graffiexplorer',
