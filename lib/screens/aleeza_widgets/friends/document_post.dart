@@ -118,7 +118,7 @@ class _DocumentPostCardState extends State<DocumentPostCard> {
           // ─── Middle: Document Carousel Box ─────────────────────────────────
           Container(
             width: double.infinity,
-            height: 177.h, // Fixed height to encapsulate the swipable content safely
+            height: 200.h, // Fixed height to encapsulate the swipable content safely
             decoration: BoxDecoration(
               color: AppTheme.of(context).background.shade200!,
               borderRadius: BorderRadius.circular(16.r),
@@ -134,7 +134,7 @@ class _DocumentPostCardState extends State<DocumentPostCard> {
                     itemBuilder: (context, index) {
                       final doc = widget.documents[index];
                       return Padding(
-                        padding: Space.all(12),
+                        padding: Space.only(left:12, right:12, top: 12,),
                         child: Column(
                           children: [
                             // Page indicator text (e.g., 1/3)
@@ -154,9 +154,10 @@ class _DocumentPostCardState extends State<DocumentPostCard> {
                                 color: AppTheme.of(context).background.main!,
                                 borderRadius: BorderRadius.circular(24.r),
                               ),
-                             //padding: Space.all(15),
+                            // padding: Space.all(15),
                               child: SvgPicture.asset(
                                 'assets/svgs/pdf.svg',
+                                
                                 //fit: BoxFit.contain,
                               ),
                             ),
@@ -176,7 +177,7 @@ class _DocumentPostCardState extends State<DocumentPostCard> {
                             GestureDetector(
                               onTap: () => widget.onDownloadTap?.call(index),
                               child: Container(
-                             //  padding: Space.only(right: 16.w, top: 8.h),
+                               padding: Space.all(12,8),
                                 decoration: BoxDecoration(
                                   color: AppTheme.of(context).accent.main!,
                                   borderRadius: BorderRadius.circular(16.r),
@@ -185,13 +186,10 @@ class _DocumentPostCardState extends State<DocumentPostCard> {
                                   mainAxisSize: MainAxisSize.min,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Padding(
-                                      padding: Space.all(12,7.5),
-                                      child: SvgPicture.asset(
-                                        'assets/svgs/document-download.svg',
-                                        width: 16.w,
-                                        height: 16.h,
-                                      ),
+                                    SvgPicture.asset(
+                                      'assets/svgs/document-download.svg',
+                                      width: 16.w,
+                                      height: 16.h,
                                     ),
                                     Space.xf(2),
                                     Text(
@@ -210,20 +208,23 @@ class _DocumentPostCardState extends State<DocumentPostCard> {
                 ),
                 Space.yf(10),
                 // Slider dots indicator pagination mockup graphic line representation
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: List.generate(
-                    widget.documents.length,
-                    (index) => AnimatedContainer(
-                      duration: UIProps.duration0,
-                      margin: Space.hf(3),
-                      width: 4.w,
-                      height: 4.h,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: _currentPage == index
-                            ? AppTheme.of(context).primary.main!
-                            : AppTheme.of(context).lightGrey.main!,
+                Padding(
+                  padding: Space.only(bottom:10, top: 0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: List.generate(
+                      widget.documents.length,
+                      (index) => AnimatedContainer(
+                        duration: UIProps.duration0,
+                        margin: Space.hf(3),
+                        width: 4.w,
+                        height: 4.h,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: _currentPage == index
+                              ? AppTheme.of(context).primary.main!
+                              : AppTheme.of(context).lightGrey.main!,
+                        ),
                       ),
                     ),
                   ),
@@ -232,7 +233,7 @@ class _DocumentPostCardState extends State<DocumentPostCard> {
             ),
           ),
 
-          Space.yf(12),
+          Space.yf(10),
 
           // ─── Caption Section ───────────────────────────────────────────────
           RichText(
