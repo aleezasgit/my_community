@@ -21,4 +21,6 @@ abstract class AppRoutes {
   static const SingleVideoScreen = '/single-video-screen';
   static const yourOwnPostSinglePhotoScreen = '/your-own-post-single-photo-screen';
   static const documentPostScreen = '/document-post-screen';
+  static const yourOwnPostMultiplePhotoScreen = '/your-own-post-multiple-photo-screen';
+  static const TextonlyScreen = '/text-only-screen';
 }

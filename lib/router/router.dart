@@ -3,6 +3,8 @@ import 'package:my_community/router/routes.dart';
 import 'package:my_community/screens/aleeza_widgets/friends.dart';
 import 'package:my_community/screens/aleeza_widgets/friends/document_post.dart';
 import 'package:my_community/screens/aleeza_widgets/friends/single_video.dart';
+import 'package:my_community/screens/aleeza_widgets/friends/textonly.dart';
+import 'package:my_community/screens/aleeza_widgets/friends/yourown_post_multiple_photo.dart';
 import 'package:my_community/screens/aleeza_widgets/friends/yourown_post_single_photo.dart';
 import 'package:my_community/screens/aleeza_widgets/join_community.dart';
 import 'package:my_community/screens/aleeza_widgets/pick_interests.dart';
@@ -39,6 +41,8 @@ final Map<String, Widget Function(dynamic)> appRoutes = {
     AppRoutes.SingleVideoScreen: (_) => const SingleVideo(),
     AppRoutes.yourOwnPostSinglePhotoScreen: (_) => const OwnPostSinglePhotoScreen(),
     AppRoutes.documentPostScreen: (_) => const DocumentPostScreen(),
+    AppRoutes.yourOwnPostMultiplePhotoScreen: (_) => const PhotoPostScreen(),
+    AppRoutes.TextonlyScreen: (_) => const TextPostScreen(),
 
 };
 

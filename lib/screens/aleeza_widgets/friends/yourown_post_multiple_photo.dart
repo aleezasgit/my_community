@@ -8,47 +8,44 @@ import 'package:my_community/configs/configs.dart';
 // 1. SUB-COMPONENT WIDGETS (Placed first)
 // =============================================================================
 
-class OwnPostSinglePhoto extends StatefulWidget {
+class PhotoPostCard extends StatefulWidget {
   final String username;
   final String timeAgo;
   final String avatarPath;
-  final String photoPath;
+  final List<String> imagePaths; // Supports a carousel list of photos
   final String captionUser;
   final String captionText;
   final int likesCount;
   final int commentsCount;
   final int bookmarksCount;
   final VoidCallback? onMoreTap;
-  final VoidCallback? onLikeTap;
   final VoidCallback? onCommentTap;
   final VoidCallback? onBookmarkTap;
-  final VoidCallback? onVideoPlayTap;
   final Function(bool)? onLikeToggle;
 
-  const OwnPostSinglePhoto({
+  const PhotoPostCard({
     super.key,
     required this.username,
     required this.timeAgo,
     required this.avatarPath,
-    required this.photoPath,
+    required this.imagePaths,
     required this.captionUser,
     required this.captionText,
     required this.likesCount,
     required this.commentsCount,
     required this.bookmarksCount,
     this.onMoreTap,
-    this.onLikeTap,
     this.onCommentTap,
     this.onBookmarkTap,
-    this.onVideoPlayTap,
     this.onLikeToggle,
   });
 
   @override
-  State<OwnPostSinglePhoto> createState() => _OwnPostSinglePhotoState();
+  State<PhotoPostCard> createState() => _PhotoPostCardState();
 }
 
-class _OwnPostSinglePhotoState extends State<OwnPostSinglePhoto> {
+class _PhotoPostCardState extends State<PhotoPostCard> {
+  int _currentPage = 0;
   bool _isLiked = false;
 
   @override
@@ -57,8 +54,10 @@ class _OwnPostSinglePhotoState extends State<OwnPostSinglePhoto> {
 
     return Container(
       width: double.infinity,
+     // padding: Space.all(12, 16),
       decoration: BoxDecoration(
         color: cardBg,
+       // borderRadius: BorderRadius.circular(24.r),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -72,7 +71,6 @@ class _OwnPostSinglePhotoState extends State<OwnPostSinglePhoto> {
                   widget.avatarPath,
                   width: 46.w,
                   height: 46.h,
-                  fit: BoxFit.cover,
                 ),
               ),
               Space.xf(10),
@@ -105,23 +103,71 @@ class _OwnPostSinglePhotoState extends State<OwnPostSinglePhoto> {
 
           Space.yf(15),
 
-          // ─── Middle: Video Thumbnail Preview Frame (PNG) ───────────────────
-          GestureDetector(
-            onTap: widget.onVideoPlayTap,
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                ClipRRect(
+          // ─── Middle: Photo Carousel Box ────────────────────────────────────
+          Stack(
+            children: [
+              Container(
+                width: double.infinity,
+                height: 177.h, // Extended viewport safety layer matching document card specifications
+                // decoration: BoxDecoration(
+                //   borderRadius: BorderRadius.circular(16.r),
+                // ),
+                child: ClipRRect(
                   borderRadius: BorderRadius.circular(16.r),
-                  child: Image.asset(
-                    widget.photoPath,
-                    height: 177.h,
-                    width: double.infinity,
-                    fit: BoxFit.cover,
+                  child: PageView.builder(
+                    itemCount: widget.imagePaths.length,
+                    onPageChanged: (index) {
+                      setState(() => _currentPage = index);
+                    },
+                    itemBuilder: (context, index) {
+                      return Image.asset(
+                        widget.imagePaths[index],
+                        width: double.infinity,
+                        height: double.infinity,
+                        fit: BoxFit.cover,
+                      );
+                    },
                   ),
                 ),
-              ],
-            ),
+              ),
+
+              // Mockup Pagination Label Layer (e.g., 1/8)
+              if (widget.imagePaths.length > 1)
+                Positioned(
+                  top: 12.h,
+                  right: 12.w,
+                  child: Text(
+                    '${_currentPage + 1}/${widget.imagePaths.length}',
+                    style: AppText.l2!.cl(AppTheme.of(context).white!),
+                  ),
+                ),
+
+              // Carousel Dots Indicator Layer
+              if (widget.imagePaths.length > 1)
+                Positioned(
+                  bottom: 12.h,
+                  left: 0,
+                  right: 0,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: List.generate(
+                      widget.imagePaths.length,
+                      (index) => AnimatedContainer(
+                        duration: UIProps.duration0,
+                        margin: Space.hf(3),
+                        width: 4.w,
+                        height: 4.h,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: _currentPage == index
+                              ? const Color(0xFF566B4D) // Sage active dot selection indicator 
+                              : AppTheme.of(context).white!.withOpacity(0.5),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+            ],
           ),
 
           Space.yf(12),
@@ -147,10 +193,10 @@ class _OwnPostSinglePhotoState extends State<OwnPostSinglePhoto> {
           // ─── Bottom: Interaction Utility Bar (SVGs) ───────────────────────
           Row(
             children: [
+              // Like Action Component (Interactive Toggle Switch)
               GestureDetector(
                 onTap: () {
                   setState(() => _isLiked = !_isLiked);
-                  widget.onLikeTap?.call();
                   widget.onLikeToggle?.call(_isLiked);
                 },
                 child: Row(
@@ -175,6 +221,7 @@ class _OwnPostSinglePhotoState extends State<OwnPostSinglePhoto> {
               ),
               Space.xf(24),
 
+              // Comment Action Component
               GestureDetector(
                 onTap: widget.onCommentTap,
                 child: Row(
@@ -195,6 +242,7 @@ class _OwnPostSinglePhotoState extends State<OwnPostSinglePhoto> {
               ),
               Space.xf(24),
 
+              // Bookmark Action Component
               GestureDetector(
                 onTap: widget.onBookmarkTap,
                 child: Row(
@@ -225,12 +273,22 @@ class _OwnPostSinglePhotoState extends State<OwnPostSinglePhoto> {
 // 2. MAIN SCREEN ENTRY (Placed last)
 // =============================================================================
 
-class OwnPostSinglePhotoScreen extends StatelessWidget {
-  const OwnPostSinglePhotoScreen({super.key});
+class PhotoPostScreen extends StatelessWidget {
+  const PhotoPostScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     App.init(context);
+
+    // Mocking an 8-photo carousel asset payload sequence
+    final mockPhotos = [
+      'assets/pngs/Rectangle 88.png',
+      'assets/pngs/Rectangle 88.png',
+      'assets/pngs/Rectangle 88.png',
+      'assets/pngs/Rectangle 88.png',
+      'assets/pngs/Rectangle 88.png',
+      'assets/pngs/Rectangle 88.png',
+    ];
 
     return Scaffold(
       backgroundColor: AppTheme.of(context).background.main,
@@ -251,22 +309,21 @@ class OwnPostSinglePhotoScreen extends StatelessWidget {
           children: [
             Space.yf(16),
 
-            // Displaying the static Video Post Component with Mockup Values
-            OwnPostSinglePhoto(
-              username: 'Kairo (You)',
-              timeAgo: '53 Minutes ago',
+            // Carousel Image Multi-Photo Card implementation hook
+            PhotoPostCard(
+              username: 'Noam Laish',
+              timeAgo: '5 Hours ago',
               avatarPath: 'assets/pngs/Frame 2147229685.png',
-              photoPath: 'assets/pngs/Rectangle 88.png',
+              imagePaths: mockPhotos,
               captionUser: 'graffiexplorer',
               captionText: 'Exploring hidden murals that tell stories of the city\'s soul. zesty flatlay and create a \'lime-light\' ... more',
-              likesCount: 45,
-              commentsCount: 8,
-              bookmarksCount: 12,
-              onMoreTap: () => debugPrint('More pressed'),
-              onLikeTap: () => debugPrint('Like pressed'),
+              likesCount: 60,
+              commentsCount: 15,
+              bookmarksCount: 7,
+              onMoreTap: () => debugPrint('More options pressed'),
               onCommentTap: () => debugPrint('Comment pressed'),
               onBookmarkTap: () => debugPrint('Bookmark pressed'),
-              onVideoPlayTap: () => debugPrint('Video clicked to play/pause'),
+              onLikeToggle: (isLiked) => debugPrint('Liked status updated to: $isLiked'),
             ),
 
             Space.yf(24),

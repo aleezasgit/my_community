@@ -8,47 +8,39 @@ import 'package:my_community/configs/configs.dart';
 // 1. SUB-COMPONENT WIDGETS (Placed first)
 // =============================================================================
 
-class OwnPostSinglePhoto extends StatefulWidget {
+class TextPostCard extends StatefulWidget {
   final String username;
   final String timeAgo;
   final String avatarPath;
-  final String photoPath;
-  final String captionUser;
-  final String captionText;
+  final String textContent;
   final int likesCount;
   final int commentsCount;
   final int bookmarksCount;
   final VoidCallback? onMoreTap;
-  final VoidCallback? onLikeTap;
   final VoidCallback? onCommentTap;
   final VoidCallback? onBookmarkTap;
-  final VoidCallback? onVideoPlayTap;
   final Function(bool)? onLikeToggle;
 
-  const OwnPostSinglePhoto({
+  const TextPostCard({
     super.key,
     required this.username,
     required this.timeAgo,
     required this.avatarPath,
-    required this.photoPath,
-    required this.captionUser,
-    required this.captionText,
+    required this.textContent,
     required this.likesCount,
     required this.commentsCount,
     required this.bookmarksCount,
     this.onMoreTap,
-    this.onLikeTap,
     this.onCommentTap,
     this.onBookmarkTap,
-    this.onVideoPlayTap,
     this.onLikeToggle,
   });
 
   @override
-  State<OwnPostSinglePhoto> createState() => _OwnPostSinglePhotoState();
+  State<TextPostCard> createState() => _TextPostCardState();
 }
 
-class _OwnPostSinglePhotoState extends State<OwnPostSinglePhoto> {
+class _TextPostCardState extends State<TextPostCard> {
   bool _isLiked = false;
 
   @override
@@ -57,13 +49,15 @@ class _OwnPostSinglePhotoState extends State<OwnPostSinglePhoto> {
 
     return Container(
       width: double.infinity,
+      //padding: Space.all(12, 16),
       decoration: BoxDecoration(
         color: cardBg,
+        //: BorderRadius.circular(24.r),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // ─── Header: User Profile Row ──────────────────────────────────────
+          // ─── Header: User Profile Row (Exact Same Template) ────────────────
           Row(
             children: [
               ClipRRect(
@@ -72,7 +66,6 @@ class _OwnPostSinglePhotoState extends State<OwnPostSinglePhoto> {
                   widget.avatarPath,
                   width: 46.w,
                   height: 46.h,
-                  fit: BoxFit.cover,
                 ),
               ),
               Space.xf(10),
@@ -105,52 +98,32 @@ class _OwnPostSinglePhotoState extends State<OwnPostSinglePhoto> {
 
           Space.yf(15),
 
-          // ─── Middle: Video Thumbnail Preview Frame (PNG) ───────────────────
-          GestureDetector(
-            onTap: widget.onVideoPlayTap,
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(16.r),
-                  child: Image.asset(
-                    widget.photoPath,
-                    height: 177.h,
-                    width: double.infinity,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ],
+          // ─── Middle: Text Content Bubble Frame ─────────────────────────────
+          Container(
+            width: double.infinity,
+            padding: Space.only(top: 12, bottom: 35, left: 12, right: 26),
+            decoration: BoxDecoration(
+              color: AppTheme.of(context).background.shade200!,
+              borderRadius: BorderRadius.circular(16.r),
+            ),
+            child: Text(
+              widget.textContent,
+              style: AppText.l1!.cl(AppTheme.of(context).text.shade600!),
+              // .copyWith(
+              //       height: 1.5, // Matches mockup paragraph paragraph spacing guidelines
+              //     ),
             ),
           ),
 
           Space.yf(12),
 
-          // ─── Caption Section ───────────────────────────────────────────────
-          RichText(
-            text: TextSpan(
-              children: [
-                TextSpan(
-                  text: '${widget.captionUser} ',
-                  style: AppText.l1b!.cl(AppTheme.of(context).text.shade600!),
-                ),
-                TextSpan(
-                  text: widget.captionText,
-                  style: AppText.l1!.cl(AppTheme.of(context).text.shade600!),
-                ),
-              ],
-            ),
-          ),
-
-          Space.yf(12),
-
-          // ─── Bottom: Interaction Utility Bar (SVGs) ───────────────────────
+          // ─── Bottom: Interaction Utility Bar (SVGs with State Toggle) ──────
           Row(
             children: [
+              // Like Action Component
               GestureDetector(
                 onTap: () {
                   setState(() => _isLiked = !_isLiked);
-                  widget.onLikeTap?.call();
                   widget.onLikeToggle?.call(_isLiked);
                 },
                 child: Row(
@@ -175,6 +148,7 @@ class _OwnPostSinglePhotoState extends State<OwnPostSinglePhoto> {
               ),
               Space.xf(24),
 
+              // Comment Action Component
               GestureDetector(
                 onTap: widget.onCommentTap,
                 child: Row(
@@ -195,6 +169,7 @@ class _OwnPostSinglePhotoState extends State<OwnPostSinglePhoto> {
               ),
               Space.xf(24),
 
+              // Bookmark Action Component
               GestureDetector(
                 onTap: widget.onBookmarkTap,
                 child: Row(
@@ -225,8 +200,8 @@ class _OwnPostSinglePhotoState extends State<OwnPostSinglePhoto> {
 // 2. MAIN SCREEN ENTRY (Placed last)
 // =============================================================================
 
-class OwnPostSinglePhotoScreen extends StatelessWidget {
-  const OwnPostSinglePhotoScreen({super.key});
+class TextPostScreen extends StatelessWidget {
+  const TextPostScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -251,22 +226,19 @@ class OwnPostSinglePhotoScreen extends StatelessWidget {
           children: [
             Space.yf(16),
 
-            // Displaying the static Video Post Component with Mockup Values
-            OwnPostSinglePhoto(
+            // Displaying the static Text Only Card component
+            TextPostCard(
               username: 'Kairo (You)',
-              timeAgo: '53 Minutes ago',
+              timeAgo: '5 Hours ago',
               avatarPath: 'assets/pngs/Frame 2147229685.png',
-              photoPath: 'assets/pngs/Rectangle 88.png',
-              captionUser: 'graffiexplorer',
-              captionText: 'Exploring hidden murals that tell stories of the city\'s soul. zesty flatlay and create a \'lime-light\' ... more',
-              likesCount: 45,
-              commentsCount: 8,
-              bookmarksCount: 12,
-              onMoreTap: () => debugPrint('More pressed'),
-              onLikeTap: () => debugPrint('Like pressed'),
+              textContent: 'Discover the vibrant world of hidden murals that reveal the heart and soul of the city. Each artwork is a zesty flatlay, bursting with colors and stories that invite you to explore deeper. Join us on this artistic journey and shine a \'lime-light\' on the creativity that surrounds us!',
+              likesCount: 60,
+              commentsCount: 15,
+              bookmarksCount: 7,
+              onMoreTap: () => debugPrint('More options pressed'),
               onCommentTap: () => debugPrint('Comment pressed'),
               onBookmarkTap: () => debugPrint('Bookmark pressed'),
-              onVideoPlayTap: () => debugPrint('Video clicked to play/pause'),
+              onLikeToggle: (isLiked) => debugPrint('Like toggled state: $isLiked'),
             ),
 
             Space.yf(24),

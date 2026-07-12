@@ -8,7 +8,7 @@ import 'package:my_community/configs/configs.dart';
 // 1. SUB-COMPONENT WIDGETS (Placed first)
 // =============================================================================
 
-class VideoPostCard extends StatelessWidget {
+class VideoPostCard extends StatefulWidget {
   final String username;
   final String timeAgo;
   final String avatarPath;
@@ -23,6 +23,7 @@ class VideoPostCard extends StatelessWidget {
   final VoidCallback? onCommentTap;
   final VoidCallback? onBookmarkTap;
   final VoidCallback? onVideoPlayTap;
+  final Function(bool)? onLikeToggle;
 
   const VideoPostCard({
     super.key,
@@ -39,34 +40,37 @@ class VideoPostCard extends StatelessWidget {
     this.onLikeTap,
     this.onCommentTap,
     this.onBookmarkTap,
-    this.onVideoPlayTap,
+    this.onVideoPlayTap, this.onLikeToggle,
   });
 
   @override
+  _VideoPostCardState createState() => _VideoPostCardState();
+}
+
+class _VideoPostCardState extends State<VideoPostCard> {
+  bool _isLiked = false;
+
+  @override
   Widget build(BuildContext context) {
-    final Color cardBg = AppTheme.of(context).background.shade200!;
+    final Color cardBg = AppTheme.of(context).background.main!;
 
     return Container(
       width: double.infinity,
-    //  padding: Space.all(12, 16),
       decoration: BoxDecoration(
         color: cardBg,
-       // borderRadius: BorderRadius.circular(24.r),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // ─── Header: User Profile Row ──────────────────────────────────────
           Row(
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(12.r),
                 child: Image.asset(
-                  avatarPath,
+                  widget.avatarPath,
                   width: 46.w,
                   height: 46.h,
-                 fit: BoxFit.cover,
-                                 
+                  fit: BoxFit.cover,
                 ),
               ),
               Space.xf(10),
@@ -75,49 +79,44 @@ class VideoPostCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      username,
+                      widget.username,
                       style: AppText.h5b!.cl(AppTheme.of(context).text.shade800!),
                     ),
                     Space.yf(2),
                     Text(
-                      timeAgo,
+                      widget.timeAgo,
                       style: AppText.l1!.cl(AppTheme.of(context).text.main!),
                     ),
                   ],
                 ),
               ),
               GestureDetector(
-                onTap: onMoreTap,
-               // behavior: HitTestBehavior.translucent,
+                onTap: widget.onMoreTap,
                 child: SvgPicture.asset(
                   'assets/svgs/three_dots.svg',
                   width: 20.w,
                   height: 20.h,
-                 
                 ),
               ),
             ],
           ),
 
-          Space.yf(12),
+          Space.yf(15),
 
-          // ─── Middle: Video Thumbnail Preview Frame (PNG) ───────────────────
           GestureDetector(
-            onTap: onVideoPlayTap,
+            onTap: widget.onVideoPlayTap,
             child: Stack(
               alignment: Alignment.center,
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(16.r),
                   child: Image.asset(
-                    height: 177.h,
-                    videoThumbnailPath,
+                    widget.videoThumbnailPath,
                     width: double.infinity,
+                    height: 177.h,
                     fit: BoxFit.cover,
-                    
                   ),
                 ),
-                // Play Button Layer Overlay
                 Container(
                   width: 38.w,
                   height: 38.h,
@@ -143,16 +142,15 @@ class VideoPostCard extends StatelessWidget {
 
           Space.yf(12),
 
-          // ─── Caption Section ───────────────────────────────────────────────
           RichText(
             text: TextSpan(
               children: [
                 TextSpan(
-                  text: '$captionUser ',
+                  text: '${widget.captionUser} ',
                   style: AppText.l1b!.cl(AppTheme.of(context).text.shade600!),
                 ),
                 TextSpan(
-                  text: captionText,
+                  text: widget.captionText,
                   style: AppText.l1!.cl(AppTheme.of(context).text.shade600!),
                 ),
               ],
@@ -161,23 +159,28 @@ class VideoPostCard extends StatelessWidget {
 
           Space.yf(12),
 
-          // ─── Bottom: Interaction Utility Bar (SVGs) ───────────────────────
           Row(
             children: [
-              // Like Action Component
               GestureDetector(
-                onTap: onLikeTap,
+                onTap: () {
+                  setState(() => _isLiked = !_isLiked);
+                  widget.onLikeTap?.call();
+                },
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    SvgPicture.asset(
-                      'assets/svgs/heart.svg',
-                      width: 20.w,
-                      height: 20.h,
+                    AnimatedSwitcher(
+                      duration: UIProps.duration0,
+                      child: SvgPicture.asset(
+                        _isLiked ? 'assets/svgs/heart.svg' : 'assets/svgs/Iconly.svg',
+                        key: ValueKey<bool>(_isLiked),
+                        width: 20.w,
+                        height: 20.h,
+                      ),
                     ),
                     Space.xf(4),
                     Text(
-                      '$likesCount',
+                      '${widget.likesCount + (_isLiked ? 1 : 0)}',
                       style: AppText.l1!.cl(AppTheme.of(context).text.shade600!),
                     ),
                   ],
@@ -185,9 +188,8 @@ class VideoPostCard extends StatelessWidget {
               ),
               Space.xf(24),
 
-              // Comment Action Component
               GestureDetector(
-                onTap: onCommentTap,
+                onTap: widget.onCommentTap,
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -198,7 +200,7 @@ class VideoPostCard extends StatelessWidget {
                     ),
                     Space.xf(4),
                     Text(
-                      '$commentsCount',
+                      '${widget.commentsCount}',
                       style: AppText.l1!.cl(AppTheme.of(context).text.shade600!),
                     ),
                   ],
@@ -206,9 +208,8 @@ class VideoPostCard extends StatelessWidget {
               ),
               Space.xf(24),
 
-              // Bookmark Action Component
               GestureDetector(
-                onTap: onBookmarkTap,
+                onTap: widget.onBookmarkTap,
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -219,7 +220,7 @@ class VideoPostCard extends StatelessWidget {
                     ),
                     Space.xf(4),
                     Text(
-                      '$bookmarksCount',
+                      '${widget.bookmarksCount}',
                       style: AppText.l1!.cl(AppTheme.of(context).text.shade600!),
                     ),
                   ],

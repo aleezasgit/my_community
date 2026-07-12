@@ -8,12 +8,21 @@ import 'package:my_community/configs/configs.dart';
 // 1. SUB-COMPONENT WIDGETS (Placed first)
 // =============================================================================
 
-class DocumentPostCard extends StatelessWidget {
+class DocumentModel {
+  final String docName;
+  final String docIndexLabel;
+
+  const DocumentModel({
+    required this.docName,
+    required this.docIndexLabel,
+  });
+}
+
+class DocumentPostCard extends StatefulWidget {
   final String username;
   final String timeAgo;
   final String avatarPath;
-  final String docName;
-  final String docIndexLabel; // e.g., "1/3"
+  final List<DocumentModel> documents;
   final String captionUser;
   final String captionText;
   final int likesCount;
@@ -23,30 +32,39 @@ class DocumentPostCard extends StatelessWidget {
   final VoidCallback? onLikeTap;
   final VoidCallback? onCommentTap;
   final VoidCallback? onBookmarkTap;
-  final VoidCallback? onDownloadTap;
+  final Function(int)? onDownloadTap;
+   final Function(bool)? onLikeToggle;
 
   const DocumentPostCard({
     super.key,
     required this.username,
     required this.timeAgo,
     required this.avatarPath,
-    required this.docName,
-    required this.docIndexLabel,
+    required this.documents,
     required this.captionUser,
     required this.captionText,
     required this.likesCount,
+   
     required this.commentsCount,
     required this.bookmarksCount,
     this.onMoreTap,
     this.onLikeTap,
     this.onCommentTap,
     this.onBookmarkTap,
-    this.onDownloadTap,
+    this.onDownloadTap, this.onLikeToggle,
   });
 
   @override
+  State<DocumentPostCard> createState() => _DocumentPostCardState();
+}
+
+class _DocumentPostCardState extends State<DocumentPostCard> {
+  int _currentPage = 0;
+  bool _isLiked = false;
+
+  @override
   Widget build(BuildContext context) {
-    final Color cardBg = AppTheme.of(context).background.shade200!;
+    final Color cardBg = AppTheme.of(context).background.main!;
 
     return Container(
       width: double.infinity,
@@ -62,7 +80,7 @@ class DocumentPostCard extends StatelessWidget {
               ClipRRect(
                 borderRadius: BorderRadius.circular(12.r),
                 child: Image.asset(
-                  avatarPath,
+                  widget.avatarPath,
                   width: 46.w,
                   height: 46.h,
                 ),
@@ -73,19 +91,19 @@ class DocumentPostCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      username,
+                      widget.username,
                       style: AppText.h5b!.cl(AppTheme.of(context).text.shade800!),
                     ),
                     Space.yf(2),
                     Text(
-                      timeAgo,
+                      widget.timeAgo,
                       style: AppText.l1!.cl(AppTheme.of(context).text.main!),
                     ),
                   ],
                 ),
               ),
               GestureDetector(
-                onTap: onMoreTap,
+                onTap: widget.onMoreTap,
                 child: SvgPicture.asset(
                   'assets/svgs/three_dots.svg',
                   width: 20.w,
@@ -95,114 +113,120 @@ class DocumentPostCard extends StatelessWidget {
             ],
           ),
 
-          Space.yf(12),
+          Space.yf(15),
 
-          // ─── Middle: Document Presentation Preview Box ─────────────────────
+          // ─── Middle: Document Carousel Box ─────────────────────────────────
           Container(
             width: double.infinity,
-            padding: Space.all(16, 16),
+            height: 177.h, // Fixed height to encapsulate the swipable content safely
             decoration: BoxDecoration(
-              color: AppTheme.of(context).background.shade100!,
-              borderRadius: BorderRadius.circular(24.r),
+              color: AppTheme.of(context).background.shade200!,
+              borderRadius: BorderRadius.circular(16.r),
             ),
             child: Column(
               children: [
-                // Page indicator label text alignment block (e.g. 1/3)
-                Align(
-                  alignment: Alignment.topRight,
-                  child: Text(
-                    docIndexLabel,
-                    style: AppText.l1!.cl(AppTheme.of(context).text.shade600!),
-                  ),
-                ),
-                
-                // PDF Icon Graphic Box
-                Container(
-                  width: 56.w,
-                  height: 56.h,
-                  decoration: BoxDecoration(
-                    color: AppTheme.of(context).background.shade200!,
-                    borderRadius: BorderRadius.circular(16.r),
-                  ),
-                  padding: Space.all(12),
-                  child: SvgPicture.asset(
-                    'assets/svgs/pdf_icon.svg',
-                    fit: BoxFit.contain,
-                  ),
-                ),
-                
-                Space.yf(12),
-                
-                // Document filename typography string
-                Text(
-                  docName,
-                  style: AppText.b1b!.cl(AppTheme.of(context).text.shade800!),
-                  textAlign: TextAlign.center,
-                ),
-                
-                Space.yf(16),
-                
-                // Action Button Controller: Download Action Block Button
-                GestureDetector(
-                  onTap: onDownloadTap,
-                  child: Container(
-                   // padding: Space.symmetric(horizontal: 16.w, vertical: 10.h),
-                    decoration: BoxDecoration(
-                      color: AppTheme.of(context).accent.main!,
-                      borderRadius: BorderRadius.circular(12.r),
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SvgPicture.asset(
-                          'assets/svgs/download_icon.svg',
-                          width: 14.w,
-                          height: 14.h,
+                Expanded(
+                  child: PageView.builder(
+                    itemCount: widget.documents.length,
+                    onPageChanged: (index) {
+                      setState(() => _currentPage = index);
+                    },
+                    itemBuilder: (context, index) {
+                      final doc = widget.documents[index];
+                      return Padding(
+                        padding: Space.all(12),
+                        child: Column(
+                          children: [
+                            // Page indicator text (e.g., 1/3)
+                            Align(
+                              alignment: Alignment.topRight,
+                              child: Text(
+                                doc.docIndexLabel,
+                                style: AppText.l1bm!.cl(AppTheme.of(context).text.shade600!),
+                              ),
+                            ),
+                            
+                            // PDF Icon Graphic Box
+                            Container(
+                              width: 50.w,
+                              height: 50.h,
+                              decoration: BoxDecoration(
+                                color: AppTheme.of(context).background.main!,
+                                borderRadius: BorderRadius.circular(24.r),
+                              ),
+                             //padding: Space.all(15),
+                              child: SvgPicture.asset(
+                                'assets/svgs/pdf.svg',
+                                //fit: BoxFit.contain,
+                              ),
+                            ),
+                            
+                            Space.yf(10),
+                            
+                            // Document filename typography string
+                            Text(
+                              doc.docName,
+                              style: AppText.b1!.cl(AppTheme.of(context).text.shade800!),
+                              textAlign: TextAlign.center,
+                            ),
+                            
+                            Space.yf(16),
+                            
+                            // Action Button Controller: Download Button
+                            GestureDetector(
+                              onTap: () => widget.onDownloadTap?.call(index),
+                              child: Container(
+                             //  padding: Space.only(right: 16.w, top: 8.h),
+                                decoration: BoxDecoration(
+                                  color: AppTheme.of(context).accent.main!,
+                                  borderRadius: BorderRadius.circular(16.r),
+                                ),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Padding(
+                                      padding: Space.all(12,7.5),
+                                      child: SvgPicture.asset(
+                                        'assets/svgs/document-download.svg',
+                                        width: 16.w,
+                                        height: 16.h,
+                                      ),
+                                    ),
+                                    Space.xf(2),
+                                    Text(
+                                      'Download',
+                                      style: AppText.l1b!.cl(AppTheme.of(context).white!),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                        Space.xf(6),
-                        Text(
-                          'Download',
-                          style: AppText.b2b!.cl(AppTheme.of(context).white!),
-                        ),
-                      ],
-                    ),
+                      );
+                    },
                   ),
                 ),
-                
-                Space.yf(8),
-                
+                Space.yf(10),
                 // Slider dots indicator pagination mockup graphic line representation
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      width: 6.w,
-                      height: 6.w,
+                  children: List.generate(
+                    widget.documents.length,
+                    (index) => AnimatedContainer(
+                      duration: UIProps.duration0,
+                      margin: Space.hf(3),
+                      width: 4.w,
+                      height: 4.h,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: AppTheme.of(context).primary.main!,
+                        color: _currentPage == index
+                            ? AppTheme.of(context).primary.main!
+                            : AppTheme.of(context).lightGrey.main!,
                       ),
                     ),
-                    Space.xf(4),
-                    Container(
-                      width: 6.w,
-                      height: 6.w,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: AppTheme.of(context).lightGrey.main!,
-                      ),
-                    ),
-                    Space.xf(4),
-                    Container(
-                      width: 6.w,
-                      height: 6.w,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: AppTheme.of(context).lightGrey.main!,
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
               ],
             ),
@@ -215,11 +239,11 @@ class DocumentPostCard extends StatelessWidget {
             text: TextSpan(
               children: [
                 TextSpan(
-                  text: '$captionUser ',
+                  text: '${widget.captionUser} ',
                   style: AppText.l1b!.cl(AppTheme.of(context).text.shade600!),
                 ),
                 TextSpan(
-                  text: captionText,
+                  text: widget.captionText,
                   style: AppText.l1!.cl(AppTheme.of(context).text.shade600!),
                 ),
               ],
@@ -231,20 +255,27 @@ class DocumentPostCard extends StatelessWidget {
           // ─── Bottom: Interaction Utility Bar (SVGs) ───────────────────────
           Row(
             children: [
-              // Like Action Component
+              // Like Action Component (Clickable Toggle)
               GestureDetector(
-                onTap: onLikeTap,
+                onTap: () {
+                  setState(() => _isLiked = !_isLiked);
+                  widget.onLikeToggle?.call(_isLiked);
+                },
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    SvgPicture.asset(
-                      'assets/svgs/heart.svg',
-                      width: 20.w,
-                      height: 20.h,
+                    AnimatedSwitcher(
+                      duration: UIProps.duration0,
+                      child: SvgPicture.asset(
+                        _isLiked ? 'assets/svgs/heart.svg' : 'assets/svgs/Iconly.svg',
+                        key: ValueKey<bool>(_isLiked),
+                        width: 20.w,
+                        height: 20.h,
+                      ),
                     ),
                     Space.xf(4),
                     Text(
-                      '$likesCount',
+                      '${widget.likesCount + (_isLiked ? 1 : 0)}',
                       style: AppText.l1!.cl(AppTheme.of(context).text.shade600!),
                     ),
                   ],
@@ -254,7 +285,7 @@ class DocumentPostCard extends StatelessWidget {
 
               // Comment Action Component
               GestureDetector(
-                onTap: onCommentTap,
+                onTap: widget.onCommentTap,
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -265,7 +296,7 @@ class DocumentPostCard extends StatelessWidget {
                     ),
                     Space.xf(4),
                     Text(
-                      '$commentsCount',
+                      '${widget.commentsCount}',
                       style: AppText.l1!.cl(AppTheme.of(context).text.shade600!),
                     ),
                   ],
@@ -275,7 +306,7 @@ class DocumentPostCard extends StatelessWidget {
 
               // Bookmark Action Component
               GestureDetector(
-                onTap: onBookmarkTap,
+                onTap: widget.onBookmarkTap,
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -286,7 +317,7 @@ class DocumentPostCard extends StatelessWidget {
                     ),
                     Space.xf(4),
                     Text(
-                      '$bookmarksCount',
+                      '${widget.bookmarksCount}',
                       style: AppText.l1!.cl(AppTheme.of(context).text.shade600!),
                     ),
                   ],
@@ -311,6 +342,13 @@ class DocumentPostScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     App.init(context);
 
+    // Mocking a multi-document list array payload
+    final mockDocuments = [
+      const DocumentModel(docName: 'Document.pdf', docIndexLabel: '1/3'),
+      const DocumentModel(docName: 'Assignment_Guidelines.pdf', docIndexLabel: '2/3'),
+      const DocumentModel(docName: 'Project_Ramp.pdf', docIndexLabel: '3/3'),
+    ];
+
     return Scaffold(
       backgroundColor: AppTheme.of(context).background.main,
       appBar: AppBar(
@@ -330,13 +368,12 @@ class DocumentPostScreen extends StatelessWidget {
           children: [
             Space.yf(16),
 
-            // Displaying the static Document Post Component with Mockup Values
+            // Carousel Document Card implementation hook
             DocumentPostCard(
               username: 'Kairo',
               timeAgo: '5 Hours ago',
-              avatarPath: 'assets/pngs/Frame 2147229685.png', // Main avatar matching layout profile
-              docName: 'Document.pdf',
-              docIndexLabel: '1/3',
+              avatarPath: 'assets/pngs/Frame 2147229685.png',
+              documents: mockDocuments,
               captionUser: 'graffiexplorer',
               captionText: 'Exploring hidden murals that tell stories of the city\'s soul.',
               likesCount: 60,
@@ -346,7 +383,7 @@ class DocumentPostScreen extends StatelessWidget {
               onLikeTap: () => debugPrint('Like pressed'),
               onCommentTap: () => debugPrint('Comment pressed'),
               onBookmarkTap: () => debugPrint('Bookmark pressed'),
-              onDownloadTap: () => debugPrint('Start document download trigger'),
+              onDownloadTap: (index) => debugPrint('Download triggered for file index: $index'),
             ),
 
             Space.yf(24),
