@@ -23,4 +23,6 @@ abstract class AppRoutes {
   static const documentPostScreen = '/document-post-screen';
   static const yourOwnPostMultiplePhotoScreen = '/your-own-post-multiple-photo-screen';
   static const TextonlyScreen = '/text-only-screen';
+  static const newsCardScreen = '/news-card-screen';
+  static const newsDetailsScreen = '/news-details-screen';
 }
