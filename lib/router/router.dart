@@ -7,6 +7,7 @@ import 'package:my_community/screens/aleeza_widgets/friends/textonly.dart';
 import 'package:my_community/screens/aleeza_widgets/friends/yourown_post_multiple_photo.dart';
 import 'package:my_community/screens/aleeza_widgets/friends/yourown_post_single_photo.dart';
 import 'package:my_community/screens/aleeza_widgets/join_community.dart';
+import 'package:my_community/screens/aleeza_widgets/news_section/articles.dart';
 import 'package:my_community/screens/aleeza_widgets/news_section/details.dart';
 import 'package:my_community/screens/aleeza_widgets/news_section/news_card.dart';
 import 'package:my_community/screens/aleeza_widgets/pick_interests.dart';
@@ -47,6 +48,7 @@ final Map<String, Widget Function(dynamic)> appRoutes = {
     AppRoutes.TextonlyScreen: (_) => const TextPostScreen(),
     AppRoutes.newsCardScreen: (_) => const NewsCardScreen(),
     AppRoutes.newsDetailsScreen: (_) => const NewsDetailScreen(),
+    AppRoutes.newsTextCardScreen: (_) => const NewsTextCardScreen(),
 
 };
 

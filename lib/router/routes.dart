@@ -25,4 +25,5 @@ abstract class AppRoutes {
   static const TextonlyScreen = '/text-only-screen';
   static const newsCardScreen = '/news-card-screen';
   static const newsDetailsScreen = '/news-details-screen';
+  static const newsTextCardScreen = '/news-text-card-screen';
 }
