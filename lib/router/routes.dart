@@ -26,4 +26,6 @@ abstract class AppRoutes {
   static const newsCardScreen = '/news-card-screen';
   static const newsDetailsScreen = '/news-details-screen';
   static const newsTextCardScreen = '/news-text-card-screen';
+  static const TestingCommunityScreen = '/testing-community-screen';
+
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_community/router/routes.dart';
+import 'package:my_community/screens/aleeza_widgets/community_widget/community_testingscreen.dart';
 import 'package:my_community/screens/aleeza_widgets/friends.dart';
 import 'package:my_community/screens/aleeza_widgets/friends/document_post.dart';
 import 'package:my_community/screens/aleeza_widgets/friends/single_video.dart';
@@ -49,6 +50,7 @@ final Map<String, Widget Function(dynamic)> appRoutes = {
     AppRoutes.newsCardScreen: (_) => const NewsCardScreen(),
     AppRoutes.newsDetailsScreen: (_) => const NewsDetailScreen(),
     AppRoutes.newsTextCardScreen: (_) => const NewsTextCardScreen(),
+    AppRoutes.TestingCommunityScreen: (_) => const GroupProfileDisplayScreen(),
 
 };
 

@@ -7,7 +7,7 @@ class AppTheme {
       main: const Color(0xFF566B4D), // Sage
       shade100: const Color(0xFFEEF0ED),
       shade200: const Color(0xFFE6E9E4),
-      shade300: const Color(0xFFCBD1C8),
+      shade300: const Color(0xFFCBD1C8), //border
       shade500: const Color(0xFF45563E),
       shade600: const Color(0xFF34402E),
       shade700: const Color(0xFF273023),
