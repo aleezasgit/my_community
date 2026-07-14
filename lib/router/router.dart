@@ -16,9 +16,11 @@ import 'package:my_community/screens/aleeza_widgets/share_your_first_moment.dart
 import 'package:my_community/screens/aleeza_widgets/tell_us_about.dart';
 import 'package:my_community/screens/create_account/create_account.dart';
 import 'package:my_community/screens/create_new_password/create_new_password.dart';
+import 'package:my_community/screens/findfriends/find_friends.dart';
 import 'package:my_community/screens/forgot_password/forgot_password.dart';
 import 'package:my_community/screens/login/login.dart';
 import 'package:my_community/screens/onboarding/onboarding.dart';
+import 'package:my_community/screens/profile/profile.dart';
 import 'package:my_community/screens/setup_account/setup_account.dart';
 import 'package:my_community/screens/splash/splash.dart';
 import 'package:my_community/screens/theme_setting_test.dart';
@@ -51,6 +53,8 @@ final Map<String, Widget Function(dynamic)> appRoutes = {
     AppRoutes.newsDetailsScreen: (_) => const NewsDetailScreen(),
     AppRoutes.newsTextCardScreen: (_) => const NewsTextCardScreen(),
     AppRoutes.TestingCommunityScreen: (_) => const GroupProfileDisplayScreen(),
+    AppRoutes.ProfileScreen: (_) => const UserFeedProfileScreen(),
+    AppRoutes.findfriendscreen: (_) => const FindFriendsScreen(),
 
 };
 

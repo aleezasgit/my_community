@@ -154,7 +154,7 @@ class _PhotoPostCardState extends State<PhotoPostCard> {
                       widget.imagePaths.length,
                       (index) => AnimatedContainer(
                         duration: UIProps.duration0,
-                        margin: Space.hf(3),
+                        margin: Space.hf(1.5),
                         width: 4.w,
                         height: 4.h,
                         decoration: BoxDecoration(

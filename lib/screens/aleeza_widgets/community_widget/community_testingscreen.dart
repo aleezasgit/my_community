@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_community/configs/configs.dart';
 import 'package:my_community/screens/aleeza_widgets/community_widget/member.dart';
 import 'package:my_community/screens/aleeza_widgets/community_widget/status.dart';
+import 'package:my_community/screens/profile/events.dart';
 
 
 class GroupProfileDisplayScreen extends StatelessWidget {
@@ -10,6 +11,15 @@ class GroupProfileDisplayScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     App.init(context);
+
+    final mockAttendeesList = [
+      'assets/pngs/Frame 2147229685.png',
+      'assets/pngs/Rectangle 88.png',
+      'assets/pngs/Frame 2147229685.png',
+       'assets/pngs/Rectangle 88.png',
+      'assets/pngs/Frame 2147229685.png',
+       'assets/pngs/Rectangle 88.png',
+    ];
 
     return Scaffold(
       backgroundColor: AppTheme.of(context).background.main,
@@ -50,6 +60,29 @@ class GroupProfileDisplayScreen extends StatelessWidget {
               joinedDuration: '2w',
               avatarPath: 'assets/pngs/Frame 2147229685.png',
               onMessageTap: () => debugPrint('Open Chat Room Instance with Eliot'),
+            ),
+
+
+Space.yf(20),
+            ///PROFILE SECTION
+            ///
+            ///EVENT CARD
+            
+            EventPostCard(
+              organizerName: 'Desert Dash',
+              timeAgo: '5 Hours ago',
+              organizerAvatarPath: 'assets/pngs/Frame 2147229685.png',
+              eventTitle: 'Desert Sprint-Dubai',
+              eventDescription: 'Experience the ultimate desert race with stunning dunes and fast-paced excitement.... more',
+              bannerImagePath: 'assets/pngs/Rectangle 88.png',
+              eventDate: 'Sun 09,2026',
+              eventTime: '07:00 AM',
+              location: 'Al Marmoom',
+            attendeeAvatars: mockAttendeesList,
+              additionalAttendeesCount: 50,
+              isJoined: true,
+              onJoinTap: () => debugPrint('Join status modified'),
+              onCardTap: () => debugPrint('Navigate towards specified event parameters'),
             ),
 
             Space.yf(24),

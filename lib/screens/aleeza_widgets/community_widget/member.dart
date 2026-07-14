@@ -55,7 +55,7 @@ class MemberTile extends StatelessWidget {
                   name,
                   style: AppText.b1b!.cl(AppTheme.of(context).text.shade800!),
                 ),
-                Space.yf(1),
+                Space.yf(4),
                 Text(
                   'Joined $joinedDuration ago',
                   style: AppText.b1!.cl(AppTheme.of(context).text.main!),
