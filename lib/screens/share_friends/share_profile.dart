@@ -1,22 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:my_community/router/routes.dart';
-import 'package:my_community/screens/findfriends/widgets/invite.dart';
 import 'package:my_community/widgets/core/app_bar/app_bar.dart';
-import 'package:my_community/widgets/design/textfields/search_textfield/search_field.dart';
 import 'package:provider/provider.dart';
 import 'package:my_community/configs/configs.dart';
 
-// Import our shared workspace components
 
 
 part 'widgets/_body.dart';
 part 'state.dart';
 part 'data.dart';
 
-class FindFriendsScreen extends StatelessWidget {
-  const FindFriendsScreen({super.key});
+class ShareProfileScreen extends StatelessWidget {
+  const ShareProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

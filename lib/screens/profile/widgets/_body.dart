@@ -160,6 +160,63 @@ class _Body extends StatelessWidget {
               ),
             ]
 
+                      else if (state.selectedTabIndex == 2) ...[
+              
+
+               savedPost(
+              username: 'Kairo (You)',
+              timeAgo: '53 Minutes ago',
+              avatarPath: 'assets/pngs/Frame 2147229685.png',
+              photoPath: 'assets/pngs/Rectangle 88.png',
+              captionUser: 'graffiexplorer',
+              captionText: 'Exploring hidden murals that tell stories of the city\'s soul. zesty flatlay and create a \'lime-light\' ... more',
+              likesCount: 45,
+              commentsCount: 8,
+              bookmarksCount: 12,
+              onMoreTap: () => debugPrint('More pressed'),
+              onLikeTap: () => debugPrint('Like pressed'),
+              onCommentTap: () => debugPrint('Comment pressed'),
+              onBookmarkTap: () => debugPrint('Bookmark pressed'),
+              onVideoPlayTap: () => debugPrint('Video clicked to play/pause'),
+            ),
+            Space.yf(20),
+                  savedPost(
+              username: 'Kairo (You)',
+              timeAgo: '53 Minutes ago',
+              avatarPath: 'assets/pngs/Frame 2147229685.png',
+              photoPath: 'assets/pngs/Rectangle 88.png',
+              captionUser: 'graffiexplorer',
+              captionText: 'Exploring hidden murals that tell stories of the city\'s soul. zesty flatlay and create a \'lime-light\' ... more',
+              likesCount: 45,
+              commentsCount: 8,
+              bookmarksCount: 12,
+              onMoreTap: () => debugPrint('More pressed'),
+              onLikeTap: () => debugPrint('Like pressed'),
+              onCommentTap: () => debugPrint('Comment pressed'),
+              onBookmarkTap: () => debugPrint('Bookmark pressed'),
+              onVideoPlayTap: () => debugPrint('Video clicked to play/pause'),
+            ),
+            Space.yf(20),
+
+             savedPost(
+              username: 'Kairo (You)',
+              timeAgo: '53 Minutes ago',
+              avatarPath: 'assets/pngs/Frame 2147229685.png',
+              photoPath: 'assets/pngs/Rectangle 88.png',
+              captionUser: 'graffiexplorer',
+              captionText: 'Exploring hidden murals that tell stories of the city\'s soul. zesty flatlay and create a \'lime-light\' ... more',
+              likesCount: 45,
+              commentsCount: 8,
+              bookmarksCount: 12,
+              onMoreTap: () => debugPrint('More pressed'),
+              onLikeTap: () => debugPrint('Like pressed'),
+              onCommentTap: () => debugPrint('Comment pressed'),
+              onBookmarkTap: () => debugPrint('Bookmark pressed'),
+              onVideoPlayTap: () => debugPrint('Video clicked to play/pause'),
+            ),
+            Space.yf(10),
+            ]
+
 else if (state.selectedTabIndex == 3) ...[
               // Sub Tab Switcher: "My Friends" vs "Requests" chips
            Row(
@@ -243,7 +300,9 @@ else if (state.selectedTabIndex == 3) ...[
 
                 AppButton(label: 
                   'Find Friends',
-                  onPressed: () => debugPrint('Navigate to find friends exploration board'),
+                  onPressed: () {
+                    AppRoutes.findfriendscreen.push(context);
+                  },
                   buttonType:ButtonType.primaryWithIconLeft,
                   iconPath: 'assets/svgs/addwhite.svg',
                  

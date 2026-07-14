@@ -22,6 +22,7 @@ import 'package:my_community/screens/login/login.dart';
 import 'package:my_community/screens/onboarding/onboarding.dart';
 import 'package:my_community/screens/profile/profile.dart';
 import 'package:my_community/screens/setup_account/setup_account.dart';
+import 'package:my_community/screens/share_friends/share_profile.dart';
 import 'package:my_community/screens/splash/splash.dart';
 import 'package:my_community/screens/theme_setting_test.dart';
 import 'package:my_community/screens/verify_identity/verify_identity.dart';
@@ -55,6 +56,7 @@ final Map<String, Widget Function(dynamic)> appRoutes = {
     AppRoutes.TestingCommunityScreen: (_) => const GroupProfileDisplayScreen(),
     AppRoutes.ProfileScreen: (_) => const UserFeedProfileScreen(),
     AppRoutes.findfriendscreen: (_) => const FindFriendsScreen(),
+    AppRoutes.shareProfileScreen: (_) => const ShareProfileScreen(),
 
 };
 

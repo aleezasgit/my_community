@@ -9,6 +9,7 @@ import 'package:my_community/screens/aleeza_widgets/friends/yourown_post_multipl
 import 'package:my_community/screens/profile/events.dart';
 import 'package:my_community/screens/profile/my_friends.dart';
 import 'package:my_community/screens/profile/requests.dart';
+import 'package:my_community/screens/profile/saved.dart';
 
 import 'package:my_community/widgets/core/app_bar/app_bar.dart';
 import 'package:my_community/widgets/core/tab_bar/tab_bar.dart';

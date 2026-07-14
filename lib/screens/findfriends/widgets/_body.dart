@@ -7,7 +7,7 @@ class _Body extends StatelessWidget {
   Widget build(BuildContext context) {
     App.init(context);
     final state = context.watch<_ScreenState>();
-    final Color textColorShade = AppTheme.of(context).text.shade100!;
+    final Color textColorShade = AppTheme.of(context).text.shade800!;
     final Color subtitleColorMain = AppTheme.of(context).text.main!;
 
     return Scaffold(
@@ -27,7 +27,7 @@ class _Body extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Space.yf(12),
+            Space.yf(16),
 
             // ─── 2. Share Profile Link Custom Banner Box ─────────────────────
             Container(
@@ -37,7 +37,7 @@ class _Body extends StatelessWidget {
                 color: AppTheme.of(context).background.shade200,
                 borderRadius: BorderRadius.circular(16.r),
                 border: Border.all(
-                  color: const Color(0xFFC77C5E).withOpacity(0.4), // Subtle terracotta border trace
+                  color: AppTheme.of(context).accent.main!, // Subtle terracotta border trace
                   width: 1.w,
                 ),
               ),
@@ -45,19 +45,21 @@ class _Body extends StatelessWidget {
                 children: [
                   // Link Icon Container
                   Container(
-                    width: 40.w,
-                    height: 40.w,
+                    //width: 44.w,
+                   // height: 44.h,
                     decoration: BoxDecoration(
-                      color: AppTheme.of(context).background.shade100,
-                      borderRadius: BorderRadius.circular(12.r),
+                      color: AppTheme.of(context).background.main,
+                      borderRadius: BorderRadius.circular(10.r),
                     ),
                     padding: Space.all(10),
                     child: SvgPicture.asset(
-                      'assets/svgs/link.svg',
-                      colorFilter: const ColorFilter.mode(Color(0xFF566B4D), BlendMode.srcIn),
+                      'assets/svgs/linkk.svg',
+                      //colorFilter: const ColorFilter.mode(Color(0xFF566B4D), BlendMode.srcIn),
+                    height: 24.h,
+                    width: 24.w,
                     ),
                   ),
-                  Space.xf(12)!,
+                  Space.xf(10),
                   
                   // Text Block Link descriptors
                   Expanded(
@@ -68,37 +70,42 @@ class _Body extends StatelessWidget {
                           'Share Profile Link',
                           style: AppText.b1b!.cl(textColorShade),
                         ),
-                        Space.yf(2),
+                        Space.yf(4),
                         Text(
                           'www:/https/community/link',
-                          style: AppText.l1!.cl(subtitleColorMain),
+                          style: AppText.l1!,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
                       ],
                     ),
                   ),
-                  Space.xf(8)!,
+                  //Space.xf(8),
                   
                   // Share/Send Arrow Icon
-                  SvgPicture.asset(
-                    'assets/svgs/send-arrow.svg', // Maps matching share send action logo context
-                    width: 20.w,
-                    height: 20.h,
+                  GestureDetector(
+                    onTap: () {
+                      AppRoutes.shareProfileScreen.push(context);
+                    },
+                    child: SvgPicture.asset(
+                      'assets/svgs/send-2.svg', // Maps matching share send action logo context
+                      width: 24.w,
+                      height: 24.h,
+                    ),
                   ),
                 ],
               ),
             ),
 
-            Space.yf(20),
+            Space.yf(22),
 
             // Middle Helper Descriptor Copy Block
             Text(
               'Or send Invite to friends',
-              style: AppText.b2!.cl(subtitleColorMain),
+              style: AppText.b2!.cl(AppTheme.of(context).text.main!),
             ),
 
-            Space.yf(16),
+            Space.yf(22),
 
             // ─── 3. Global Search Text Field Input ────────────────────────────
             SearchField(
@@ -106,14 +113,14 @@ class _Body extends StatelessWidget {
                name: 'searchField',
             ),
 
-            Space.yf(16),
+            Space.yf(10),
 
             // ─── 4. Invite Suggestions List Pipeline ─────────────────────────
             ListView.separated(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               itemCount: mockInviteSuggestionsList.length,
-              separatorBuilder: (context, index) => Space.yf(12)!,
+              separatorBuilder: (context, index) => Space.yf(10)!,
               itemBuilder: (context, index) {
                 final friend = mockInviteSuggestionsList[index];
                 

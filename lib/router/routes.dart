@@ -29,5 +29,5 @@ abstract class AppRoutes {
   static const TestingCommunityScreen = '/testing-community-screen';
   static const ProfileScreen = '/profile-screen';
   static const findfriendscreen = '/find-friend-screen';
-
+ static const shareProfileScreen = '/share-profile-screen';
 }
