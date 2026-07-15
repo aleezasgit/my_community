@@ -30,4 +30,12 @@ abstract class AppRoutes {
   static const ProfileScreen = '/profile-screen';
   static const findfriendscreen = '/find-friend-screen';
  static const shareProfileScreen = '/share-profile-screen';
+ static const settingScreen = '/setting-screen';
+  static const faqScreen = '/faq-screen';
+  static const supportScreen = '/support-screen';
+  static const securitySettings = '/security-settings';
+  static const profileSettings = '/profile-settings';
+  static const notificationSettings = '/notification-settings';
+   static const notifications = '/notifications';
+  
 }
