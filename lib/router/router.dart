@@ -20,6 +20,8 @@ import 'package:my_community/screens/faq/faq.dart';
 import 'package:my_community/screens/findfriends/find_friends.dart';
 import 'package:my_community/screens/forgot_password/forgot_password.dart';
 import 'package:my_community/screens/login/login.dart';
+import 'package:my_community/screens/news/news_screen.dart';
+import 'package:my_community/screens/news_details/news_details.dart';
 import 'package:my_community/screens/notification/notification.dart';
 import 'package:my_community/screens/notification_settings/notification_settings.dart';
 import 'package:my_community/screens/onboarding/onboarding.dart';
@@ -58,7 +60,7 @@ final Map<String, Widget Function(dynamic)> appRoutes = {
     AppRoutes.yourOwnPostMultiplePhotoScreen: (_) => const PhotoPostScreen(),
     AppRoutes.TextonlyScreen: (_) => const TextPostScreen(),
     AppRoutes.newsCardScreen: (_) => const NewsCardScreen(),
-    AppRoutes.newsDetailsScreen: (_) => const NewsDetailScreen(),
+    //AppRoutes.newsDetailsScreen: (_) => const NewsDetailScreen(),
     AppRoutes.newsTextCardScreen: (_) => const NewsTextCardScreen(),
     AppRoutes.TestingCommunityScreen: (_) => const GroupProfileDisplayScreen(),
     AppRoutes.ProfileScreen: (_) => const UserFeedProfileScreen(),
@@ -71,6 +73,8 @@ final Map<String, Widget Function(dynamic)> appRoutes = {
      AppRoutes.profileSettings: (_) => const ProfileSettingsScreen(),
      AppRoutes.notificationSettings: (_) => const NotificationSettingsScreen(),
      AppRoutes.notifications: (_) => const NotificationsScreen(),
+     AppRoutes.news: (_) => const NewsScreen(), 
+    AppRoutes.newsDetails: (_) => const  NewsDetailsScreen(),
     
 
 };

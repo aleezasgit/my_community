@@ -36,6 +36,8 @@ abstract class AppRoutes {
   static const securitySettings = '/security-settings';
   static const profileSettings = '/profile-settings';
   static const notificationSettings = '/notification-settings';
-   static const notifications = '/notifications';
+  static const notifications = '/notifications';
+  static const news = '/news';
+ static const newsDetails = '/news-details';
   
 }
