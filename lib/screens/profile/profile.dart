@@ -12,6 +12,7 @@ import 'package:my_community/screens/profile/requests.dart';
 import 'package:my_community/screens/profile/saved.dart';
 
 import 'package:my_community/widgets/core/app_bar/app_bar.dart';
+import 'package:my_community/widgets/core/headers/user_header.dart';
 import 'package:my_community/widgets/core/tab_bar/tab_bar.dart';
 import 'package:my_community/widgets/design/buttons/app_button/app_button.dart';
 import 'package:my_community/widgets/design/textfields/search_textfield/search_field.dart';

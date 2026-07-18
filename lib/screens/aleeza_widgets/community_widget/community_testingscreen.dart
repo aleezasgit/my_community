@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:my_community/configs/configs.dart';
 import 'package:my_community/screens/aleeza_widgets/community_widget/member.dart';
+import 'package:my_community/screens/aleeza_widgets/community_widget/my_events.dart';
+import 'package:my_community/screens/aleeza_widgets/community_widget/request_event.dart';
 import 'package:my_community/screens/aleeza_widgets/community_widget/status.dart';
 import 'package:my_community/screens/profile/events.dart';
 
@@ -86,6 +88,44 @@ Space.yf(20),
             ),
 
             Space.yf(24),
+
+            MyEventPostCard(
+  organizerName: 'Desert Dash',
+  timeAgo: '5 Hours ago',
+  organizerAvatarPath: 'assets/pngs/Frame 2147229685.png',
+  eventTitle: 'Desert Sprint-Dubai',
+  eventDescription: 'Experience the ultimate desert race with stunning dunes and fast-paced excitement.... more',
+  bannerImagePath: 'assets/pngs/Rectangle 88.png',
+  eventDate: 'Sun 09,2026',
+  eventTime: '07:00 AM',
+  location: 'Al Marmoom',
+  attendeeAvatars: mockAttendeesList,
+  additionalAttendeesCount: 50,
+  isJoined: true,
+  onJoinTap: () => debugPrint('Join status modified'),
+  onCardTap: () => debugPrint('Navigate towards specified event parameters'),
+),
+
+
+Space.yf(10),
+
+RequestEvent(
+  organizerName: 'Ahmad',
+  timeAgo: '5 Hours ago',
+  organizerAvatarPath: 'assets/pngs/Frame 2147229685.png',
+  eventTitle: 'Desert Sprint-Dubai',
+  eventDescription: 'Experience the ultimate desert race with stunning dunes and fast-paced excitement.... more',
+  bannerImagePath: 'assets/pngs/Rectangle 88.png',
+  eventDate: 'Sun 09,2026',
+  eventTime: '07:00 AM',
+  location: 'Al Marmoom',
+  attendeeAvatars: mockAttendeesList,
+  additionalAttendeesCount: 50,
+  isJoined: true,
+  onDeclineTap: () => debugPrint('Event request declined'),
+  onAcceptTap: () => debugPrint('Event request accepted'),
+  onCardTap: () => debugPrint('Navigate towards specified event parameters'),
+)
           ],
         ),
       ),

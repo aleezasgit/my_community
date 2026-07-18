@@ -190,7 +190,7 @@ class _Body extends StatelessWidget {
                     buttonType: ButtonType.outlined,
                     borderColor: AppTheme.of(context).primary.shade300,
                     onPressed: (){},
-                    backgroundColor: AppTheme.of(context).background.main,
+                    backgroundColor: AppTheme.of(context).background.shade200,
                     textColor: AppTheme.of(context).text.shade800,
                     
                     
