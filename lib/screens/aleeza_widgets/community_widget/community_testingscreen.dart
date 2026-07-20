@@ -4,6 +4,7 @@ import 'package:my_community/screens/aleeza_widgets/community_widget/member.dart
 import 'package:my_community/screens/aleeza_widgets/community_widget/my_events.dart';
 import 'package:my_community/screens/aleeza_widgets/community_widget/request_event.dart';
 import 'package:my_community/screens/aleeza_widgets/community_widget/status.dart';
+import 'package:my_community/screens/aleeza_widgets/market_card.dart';
 import 'package:my_community/screens/profile/events.dart';
 
 
@@ -109,23 +110,39 @@ Space.yf(20),
 
 Space.yf(10),
 
-RequestEvent(
-  organizerName: 'Ahmad',
-  timeAgo: '5 Hours ago',
-  organizerAvatarPath: 'assets/pngs/Frame 2147229685.png',
-  eventTitle: 'Desert Sprint-Dubai',
-  eventDescription: 'Experience the ultimate desert race with stunning dunes and fast-paced excitement.... more',
-  bannerImagePath: 'assets/pngs/Rectangle 88.png',
-  eventDate: 'Sun 09,2026',
-  eventTime: '07:00 AM',
-  location: 'Al Marmoom',
-  attendeeAvatars: mockAttendeesList,
-  additionalAttendeesCount: 50,
-  isJoined: true,
-  onDeclineTap: () => debugPrint('Event request declined'),
-  onAcceptTap: () => debugPrint('Event request accepted'),
-  onCardTap: () => debugPrint('Navigate towards specified event parameters'),
-)
+MarketCard(
+              sellerName: 'Ahmed R.',
+              sellerAvatarPath: 'assets/pngs/Frame 2147229685.png',
+              itemImagePath: 'assets/pngs/Rectangle 88.png',
+              itemTitle: 'Apple Watch 7',
+              price: '2400',
+              currency: 'SAR',
+              tagLabel: 'For Sale',
+              isForSale: false,
+              isFavorite: true,
+              onFavoriteTap: () => debugPrint('Favorite toggled'),
+              onCardTap: () => debugPrint('Navigate to item details'),
+            ),
+
+// RequestEvent(
+//   organizerName: 'Ahmad',
+//   timeAgo: '5 Hours ago',
+//   organizerAvatarPath: 'assets/pngs/Frame 2147229685.png',
+//   eventTitle: 'Desert Sprint-Dubai',
+//   eventDescription: 'Experience the ultimate desert race with stunning dunes and fast-paced excitement.... more',
+//   bannerImagePath: 'assets/pngs/Rectangle 88.png',
+//   eventDate: 'Sun 09,2026',
+//   eventTime: '07:00 AM',
+//   location: 'Al Marmoom',
+//   attendeeAvatars: mockAttendeesList,
+//   additionalAttendeesCount: 50,
+//   isJoined: true,
+//   onDeclineTap: () => debugPrint('Event request declined'),
+//   onAcceptTap: () => debugPrint('Event request accepted'),
+//   onCardTap: () => debugPrint('Navigate towards specified event parameters'),
+// )
+
+
           ],
         ),
       ),
