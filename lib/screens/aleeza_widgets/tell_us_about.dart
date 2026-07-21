@@ -34,7 +34,7 @@ class _GenderCard extends StatelessWidget {
        
 
     return Padding(
-      padding: Space.all(12),
+      padding: Space.only(bottom:10),
       child: GestureDetector(
         onTap: onTap,
        // behavior: HitTestBehavior.translucent,

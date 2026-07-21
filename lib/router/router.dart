@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_community/router/routes.dart';
+import 'package:my_community/screens/account_preference/account_preference.dart';
 import 'package:my_community/screens/aleeza_widgets/community_widget/community_testingscreen.dart';
 import 'package:my_community/screens/aleeza_widgets/friends.dart';
 import 'package:my_community/screens/aleeza_widgets/friends/document_post.dart';
@@ -50,7 +51,7 @@ final Map<String, Widget Function(dynamic)> appRoutes = {
   AppRoutes.verifyIdentity: (_) => const VerifyIdentityScreen(),
   AppRoutes.createNewPassword: (_) => const CreateNewPasswordScreen(),
     AppRoutes.TestingScreen: (_) => const GenderScreen(),
-    AppRoutes.InterestScreen: (_) => const InterestsScreen(),
+   // AppRoutes.InterestScreen: (_) => const InterestsScreen(),
     AppRoutes.FriendsScreen: (_) => const FriendsScreen(),
     AppRoutes.CommunityScreen: (_) => const CommunitiesScreen(),
     AppRoutes.ShareMomentScreen: (_) => const ShareMomentScreen(),
@@ -75,6 +76,7 @@ final Map<String, Widget Function(dynamic)> appRoutes = {
      AppRoutes.notifications: (_) => const NotificationsScreen(),
      AppRoutes.news: (_) => const NewsScreen(), 
     AppRoutes.newsDetails: (_) => const  NewsDetailsScreen(),
+    AppRoutes.accountPreference: (_) => const  AccountPreferencesScreen(),
     
 
 };

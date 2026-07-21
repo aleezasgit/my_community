@@ -39,5 +39,6 @@ abstract class AppRoutes {
   static const notifications = '/notifications';
   static const news = '/news';
  static const newsDetails = '/news-details';
+ static const accountPreference= '/account-preference';
   
 }
